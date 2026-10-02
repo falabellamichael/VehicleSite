@@ -252,6 +252,7 @@
 
 .media-concept-tag { position: absolute; z-index: 2; left: 13px; bottom: 12px; display: inline-flex; align-items: center; gap: 5px; max-width: calc(100% - 26px); padding: 5px 7px; border: 1px solid #d6dacb55; color: #e7e8de; background: #10130fbd; font-size: 6px; letter-spacing: .1em; line-height: 1.2; }
 .media-concept-tag .tiny-square { flex-shrink: 0; }
+.media-vehicle > img { object-fit: contain; }
 .vehicle-image .media-concept-tag { top: 41px; bottom: auto; left: 17px; }
 .comparison-table .media-concept-tag, .sales-summary-car .media-concept-tag { display: none; }
 :root[data-motion="off"] .vehicle-ticker-track { animation: none; }

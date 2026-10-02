@@ -33,7 +33,7 @@ The old `/fleet`, `/experiences`, `/concierge`, `/documents/vehicle-guides`, `/d
 
 ## Demo boundaries
 
-Every vehicle, year, specification, condition, equipment list, price, and stock status is fictional. Prices are illustrative CAD amounts excluding tax and fees. The 6.9% initial APR is an invented calculator example, not a rate offer. Vehicle and showroom images are AI-generated fictional concepts; they are not photos of actual vehicles or the dealership. Videos and documents remain placeholders. No verified vehicle history, inspection, warranty, real appointment availability, reservation, purchase, deposit, credit application, quote, appraisal, or dealer notification exists.
+Every vehicle, year, specification, condition, equipment list, price, and stock status is fictional. Prices are illustrative CAD amounts excluding tax and fees. The 6.9% initial APR is an invented calculator example, not a rate offer. Vehicle images are AI-generated transparent concepts; the showroom image is also a fictional concept. None depicts actual vehicles or the dealership. Videos and documents remain placeholders. No verified vehicle history, inspection, warranty, real appointment availability, reservation, purchase, deposit, credit application, quote, appraisal, or dealer notification exists.
 
 No customer information is submitted. Favorites and theme/motion preferences are stored locally. Visit drafts, notes, calculator values, and document selections are held in page memory. Downloads contain the inputs the visitor elected to export. The host still receives normal requests for the static site and files. There are no analytics integrations or external image/video providers configured.
 
@@ -46,7 +46,7 @@ This is a **public static demo**, not authenticated document storage. Never put 
 - `src/sales.ts`: filtering, amount formatting, amortization, date validation, and calendar export helpers.
 - `src/App.tsx`: shell, themes, search, comparison, vehicle dialogs, and old-link redirects.
 - `src/styles.css`: original design system. `src/sales.css`: sales-edition layouts and responsive additions.
-- `public/media/images/demo/`: AI-generated concept art used for the fictional cars and showroom. Replace it with approved, owned/licensed photography when real listings and dealership assets are provided. `public/media/` also contains video slots; videos remain placeholders.
+- `public/media/images/demo/`: AI-generated transparent car cutouts and a fictional showroom scene. The Home hero backdrop reuses four car cutouts. Replace them with approved, owned/licensed imagery when real listings and dealership assets are provided. `public/media/` also contains video slots; videos remain placeholders.
 - `public/documents/`: twelve public, clearly labeled draft text templates. Replace only with approved, non-private content.
 - `scripts/pages-routes.json`: nine page routes plus six legacy redirect entry points. Keep it synchronized when adding routes.
 
