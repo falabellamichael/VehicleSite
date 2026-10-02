@@ -4,14 +4,15 @@ import { vehicles } from "../src/data";
 
 const featured = vehicles.slice(0, 3);
 
-/** Check actual mounted artwork, not just a label that can hide orphaned cars. */
+/** Check the single selected vehicle image, not just a label that can hide stale artwork. */
 async function expectSingleCar(page: Page, index: number) {
   const vehicle = featured[index];
   const stage = page.locator(".hero-stage");
   await expect(stage.locator(".hero-car-tag strong")).toHaveText(vehicle.name);
   await expect(stage.locator(".hero-car-tag")).toHaveCount(1);
   await expect(stage.locator(".hero-media")).toHaveCount(1);
-  await expect(stage.locator(".hero-media .car-art")).toHaveCount(1);
+  await expect(stage.locator(".hero-media > img")).toHaveCount(1);
+  await expect(stage.locator(".hero-media > img")).toHaveAttribute("alt", `AI-generated concept image of fictional ${vehicle.name}, a ${vehicle.category.toLowerCase()}.`);
   await expect(stage.locator('.slide-dots button[aria-pressed="true"]')).toHaveCount(1);
   await expect(stage.locator(".slide-dots button").nth(index)).toHaveAttribute("aria-pressed", "true");
   expect(await stage.locator(".hero-media").evaluate(el => (el as HTMLElement).style.getPropertyValue("--vehicle-accent"))).toBe(vehicle.color);
