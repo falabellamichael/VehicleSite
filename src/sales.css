@@ -254,6 +254,8 @@
 .media-concept-tag .tiny-square { flex-shrink: 0; }
 .vehicle-image .media-concept-tag { top: 41px; bottom: auto; left: 17px; }
 .comparison-table .media-concept-tag, .sales-summary-car .media-concept-tag { display: none; }
+:root[data-motion="off"] .vehicle-ticker-track { animation: none; }
+@media (prefers-reduced-motion: reduce) { .vehicle-ticker .vehicle-ticker-track { animation: none; transform: none; } }
 .vehicle-journey-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 17px; padding-top: 15px; border-top: 1px solid var(--line); }
 .vehicle-journey-actions .text-link { font-size: 10px; }
 .vehicle-journey-actions .sales-unavailable { padding: 0; border: 0; font-size: 10px; }
