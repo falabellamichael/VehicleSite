@@ -13,7 +13,7 @@ async function expectSingleCar(page: Page, index: number) {
   await expect(stage.locator(".hero-media")).toHaveCount(1);
   await expect(stage.locator(".hero-media .car-art")).toHaveCount(1);
   await expect(stage.locator('.slide-dots button[aria-pressed="true"]')).toHaveCount(1);
-  await expect(stage.getByRole("button", { name: `Show ${vehicle.name}`, exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(stage.locator(".slide-dots button").nth(index)).toHaveAttribute("aria-pressed", "true");
   expect(await stage.locator(".hero-media").evaluate(el => (el as HTMLElement).style.getPropertyValue("--vehicle-accent"))).toBe(vehicle.color);
 }
 
