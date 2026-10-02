@@ -1,32 +1,12 @@
-VEHICLESITE / THE ART OF ARRIVAL
-VEHICLE SPECIFICATIONS
+VEHICLESITE / VEHICLE SPECIFICATION SHEET
+DRAFT PLACEHOLDER — NOT A VERIFIED VEHICLE RECORD
 
-DRAFT PLACEHOLDER — NOT FOR OPERATIONAL OR LEGAL USE
-Document reference: VS-VEHICLE-SPECIFICATIONS
-Status: Awaiting approved content
+Vehicle / stock number: [To be supplied]
+Year / make / model / trim: [To be verified]
+Mileage and date recorded: [To be verified]
+Powertrain / transmission / drivetrain: [To be verified]
+Equipment fitted to this actual vehicle: [To be verified]
+Seller-provided identification and source documents: [To be supplied privately]
+Questions and discrepancies: [Notes]
 
-01 / PURPOSE
-[Add a concise description of the approved document and its audience.]
-
-02 / THE DETAILS
-[Add verified vehicle or service information relevant to this document.]
-[Replace every example with reviewed, accurate business information.]
-
-03 / YOUR OPTIONS
-[Add only options that are actually offered and confirmed.]
-[Specify any approved requirements or limitations.]
-
-04 / IMPORTANT INFORMATION
-[Insert reviewed policies or provider details where appropriate.]
-[Do not publish draft coverage promises, legal terms, or prices.]
-
-05 / CONTACT & NEXT STEPS
-Business contact: [To be added]
-Approved by: [To be added]
-Effective date: [To be added]
-Review date: [To be added]
-
-This sample file is included to demonstrate document preview and
-local download functionality. It does not create a reservation,
-provide insurance, establish contract terms, or describe a live offer.
-No information is submitted when this document is downloaded.
+No equipment, history, mileage, ownership, or condition claim is verified by this template. Do not place private identity documents in this public website.

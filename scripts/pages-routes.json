@@ -1,38 +1,17 @@
 [
-  {
-    "path": "",
-    "title": "The art of arrival"
-  },
-  {
-    "path": "fleet",
-    "title": "The fleet"
-  },
-  {
-    "path": "experiences",
-    "title": "Experiences"
-  },
-  {
-    "path": "concierge",
-    "title": "Concierge"
-  },
-  {
-    "path": "documents",
-    "title": "Documents"
-  },
-  {
-    "path": "documents/vehicle-guides",
-    "title": "Vehicle guides"
-  },
-  {
-    "path": "documents/booking-options",
-    "title": "Booking options"
-  },
-  {
-    "path": "documents/protection",
-    "title": "Protection & care"
-  },
-  {
-    "path": "documents/policies",
-    "title": "Policies & essentials"
-  }
+  { "path": "", "title": "Drive your next chapter" },
+  { "path": "inventory", "title": "Inventory" },
+  { "path": "buying", "title": "Buying tools" },
+  { "path": "pickup", "title": "Pickup & test drives" },
+  { "path": "documents", "title": "Documents" },
+  { "path": "documents/vehicle-records", "title": "Vehicle records" },
+  { "path": "documents/purchase-options", "title": "Purchase options" },
+  { "path": "documents/pickup-essentials", "title": "Pickup essentials" },
+  { "path": "documents/policies", "title": "Policies & essentials" },
+  { "path": "fleet", "title": "Inventory", "redirect": "inventory" },
+  { "path": "experiences", "title": "Buying tools", "redirect": "buying" },
+  { "path": "concierge", "title": "Pickup & test drives", "redirect": "pickup" },
+  { "path": "documents/vehicle-guides", "title": "Vehicle records", "redirect": "documents/vehicle-records" },
+  { "path": "documents/booking-options", "title": "Purchase options", "redirect": "documents/purchase-options" },
+  { "path": "documents/protection", "title": "Pickup essentials", "redirect": "documents/pickup-essentials" }
 ]
