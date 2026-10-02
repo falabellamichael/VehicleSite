@@ -27,7 +27,7 @@ import {
 } from "lucide-react";
 import { SiteContext, type ModalState, useSite } from "./SiteContext";
 import { vehicles, documentGroups, media } from "./data";
-import { isBoolean, isStrings, isTheme, useStored } from "./lib";
+import { isBoolean, isStrings, isTheme, useStored, publicAsset } from "./lib";
 import { Dialog, Eyebrow } from "./components/UI";
 import { MediaSlot } from "./components/Media";
 import Home from "./pages/Home";
@@ -64,7 +64,8 @@ function Brand({ footer = false }: { footer?: boolean }) {
   );
 }
 function RouteEffects({ motion }: { motion: boolean }) {
-  const { pathname } = useLocation();
+  const { pathname: rawPathname } = useLocation();
+  const pathname = rawPathname.replace(/\/+$/, "") || "/";
   const previous = useRef(pathname);
   useEffect(() => {
     const page =
@@ -251,7 +252,7 @@ function Footer() {
             <span className="micro">A WORK IN POSSIBILITY.</span>
             <p>
               All imagery, films, vehicles, and documents are placeholders. This
-              is a private development concept, not a live booking service.
+              is a public demonstration concept, not a live booking service.
             </p>
             <button
               className="text-link"
@@ -422,8 +423,8 @@ function Modal({
       >
         {media.brandVideo ? (
           <video
-            src={media.brandVideo}
-            poster={media.brandPoster || undefined}
+            src={publicAsset(media.brandVideo)}
+            poster={publicAsset(media.brandPoster) || undefined}
             controls
             playsInline
             className="brand-video"

@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import {
@@ -21,7 +22,7 @@ function DocPreview({ doc, close }: { doc: Doc; close: () => void }) {
   const [text, setText] = useState("Loading the placeholder document…");
   useEffect(() => {
     const abort = new AbortController();
-    fetch(`/documents/${doc.id}.txt`, { signal: abort.signal })
+    fetch(publicAsset(`/documents/${doc.id}.txt`), { signal: abort.signal })
       .then((r) => {
         if (!r.ok) throw new Error("Unavailable");
         return r.text();
@@ -49,7 +50,7 @@ function DocPreview({ doc, close }: { doc: Doc; close: () => void }) {
       <pre className="document-text">{text}</pre>
       <a
         className="button button-gold"
-        href={`/documents/${doc.id}.txt`}
+        href={publicAsset(`/documents/${doc.id}.txt`)}
         download
       >
         <Download size={16} />
@@ -92,7 +93,7 @@ function DocumentRow({
         </button>
         <a
           className="icon-button"
-          href={`/documents/${doc.id}.txt`}
+          href={publicAsset(`/documents/${doc.id}.txt`)}
           download
           aria-label={`Download ${doc.title} placeholder`}
         >

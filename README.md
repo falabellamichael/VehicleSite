@@ -4,6 +4,24 @@
 
 Inspired by the dark/champagne visual language of the existing SICKOS website, but implemented as an independent, original project. Every vehicle, specification, image area, film area, service description, and document is placeholder content. Nothing books a vehicle, takes a payment, emails a customer, or submits personal data.
 
+## Published preview
+
+Website: https://falabellamichael.github.io/VehicleSite/
+
+The public concept is hosted on GitHub Pages. Your computer and local development server are not needed to view it. Every push to `main` triggers `.github/workflows/pages.yml`: install the locked dependencies, build, test the static output, then publish it. GitHub Pages uses **GitHub Actions** as its source.
+
+The Pages build uses `/VehicleSite/` as its base path; the normal local build remains at `/`. Images, video posters, videos, and document downloads resolve through the same base-aware helper.
+
+```powershell
+npm run build:pages
+$env:PW_CHANNEL = 'msedge'
+npm run test:pages
+```
+
+To run those checks against the hosted site instead of a local static preview, set `$env:PAGES_URL = 'https://falabellamichael.github.io/VehicleSite/'` before `npm run test:pages`, then clear it with `Remove-Item Env:PAGES_URL`. The test-only preview server binds to loopback port 4189 and never serves the source tree.
+
+The live site remains a clearly labeled placeholder concept, not a booking or payment service. The existing no-index settings are retained; they do not make the site private.
+
 ## Run locally
 
 Node.js 22.12+ (or a supported newer release) and npm are required. The development machine used for this project has Node 24.
@@ -119,4 +137,4 @@ Add and verify any required backend services, authentication/authorization, serv
 
 The journey builder holds form values in memory only. Favorites and theme/motion preferences use localStorage and degrade gracefully when storage is unavailable. Downloads happen locally. No user data is transmitted.
 
-Client-side routes require an SPA fallback on the eventual host. A Netlify-style `_redirects` and a `vercel.json` are included for future use. No deployment is performed by this project, and no hosting workflow is enabled.
+GitHub Pages uses generated static HTML entry points for all nine routes, plus a branded `404.html`. Direct links and refreshes do not require a local server or a server-side rewrite. Netlify-style `_redirects` and `vercel.json` remain available for alternative hosts. Add new routes to `scripts/pages-routes.json` when expanding the site.

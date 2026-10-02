@@ -1,0 +1,38 @@
+[
+  {
+    "path": "",
+    "title": "The art of arrival"
+  },
+  {
+    "path": "fleet",
+    "title": "The fleet"
+  },
+  {
+    "path": "experiences",
+    "title": "Experiences"
+  },
+  {
+    "path": "concierge",
+    "title": "Concierge"
+  },
+  {
+    "path": "documents",
+    "title": "Documents"
+  },
+  {
+    "path": "documents/vehicle-guides",
+    "title": "Vehicle guides"
+  },
+  {
+    "path": "documents/booking-options",
+    "title": "Booking options"
+  },
+  {
+    "path": "documents/protection",
+    "title": "Protection & care"
+  },
+  {
+    "path": "documents/policies",
+    "title": "Policies & essentials"
+  }
+]

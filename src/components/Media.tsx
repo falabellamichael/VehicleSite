@@ -1,3 +1,4 @@
+import { publicAsset } from "../lib";
 import { useId, useState, type CSSProperties } from "react";
 import type { Vehicle } from "../data";
 import { Maximize2 } from "lucide-react";
@@ -168,7 +169,7 @@ export function MediaSlot({
     >
       {source && !failed ? (
         <img
-          src={source}
+          src={publicAsset(source)}
           alt={vehicle?.name ?? `${kind} photography`}
           loading="lazy"
           onError={() => setFailed(true)}

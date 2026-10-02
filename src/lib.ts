@@ -42,3 +42,11 @@ export function localToday() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
+
+/** Resolve files from public/ on both local and subdirectory deployments. */
+export function publicAsset(path: string): string {
+  if (!path || /^(?:[a-z][a-z\d+.-]*:|\/\/|#)/i.test(path)) return path;
+  const base = import.meta.env.BASE_URL;
+  if (base !== "/" && path.startsWith(base)) return path;
+  return base + path.replace(/^\/+/, "");
+}

@@ -18,6 +18,7 @@ import {
   JourneyCTA,
 } from "../components/UI";
 import { useSite } from "../SiteContext";
+import { publicAsset } from "../lib";
 export default function Home() {
   const [slide, setSlide] = useState(0),
     [paused, setPaused] = useState(false);
@@ -103,8 +104,8 @@ export default function Home() {
             {media.heroVideo ? (
               <video
                 className="hero-real-video"
-                src={media.heroVideo}
-                poster={media.heroPoster || undefined}
+                src={publicAsset(media.heroVideo)}
+                poster={publicAsset(media.heroPoster) || undefined}
                 muted
                 autoPlay={motion}
                 loop
