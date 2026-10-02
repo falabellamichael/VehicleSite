@@ -171,3 +171,44 @@
 @media (prefers-reduced-motion: reduce) { .sales-benefit, .sales-plus { transition: none; } .sales-benefit:hover { transform: none; } }
 :root[data-motion="off"] .sales-benefit, :root[data-motion="off"] .sales-plus { transition: none; }
 :root[data-motion="off"] .sales-benefit:hover { transform: none; }
+
+.vehicle-ticker { display: flex; min-height: 82px; overflow: hidden; background: var(--panel); }
+.vehicle-ticker-label { position: relative; z-index: 1; flex: 0 0 200px; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 13px 20px 13px 45px; border-right: 1px solid var(--line-strong); background: var(--panel-soft); }
+.vehicle-ticker-label::before { content: ""; position: absolute; left: 23px; width: 8px; height: 8px; border: 1px solid var(--accent-text); transform: rotate(45deg); }
+.ticker-kicker { color: var(--accent-text); font-size: 7px; letter-spacing: .18em; }
+.vehicle-ticker-label > strong { color: var(--text); font-size: 13px; font-weight: 500; letter-spacing: .1em; }
+.ticker-disclaimer { color: var(--muted); font-size: 6px; letter-spacing: .14em; white-space: nowrap; }
+.ticker-toggle { position: absolute; top: 8px; right: 8px; display: grid; width: 23px; height: 23px; place-items: center; border: 1px solid var(--line); color: var(--muted); background: var(--panel); }
+.ticker-toggle:hover, .ticker-toggle:focus-visible { color: var(--accent-text); border-color: var(--line-strong); }
+.vehicle-ticker-window { flex: 1 1 auto; min-width: 0; overflow: hidden; }
+.vehicle-ticker-track { display: flex; width: max-content; height: 100%; animation: vehicle-price-scroll 55s linear infinite; }
+.vehicle-ticker:hover .vehicle-ticker-track, .vehicle-ticker-window:focus-within .vehicle-ticker-track, .vehicle-ticker .vehicle-ticker-track.ticker-paused { animation-play-state: paused; }
+.vehicle-ticker-run { display: flex; flex: 0 0 auto; }
+.vehicle-ticker .vehicle-ticker-item { flex: 0 0 230px; display: flex; flex-direction: column; justify-content: center; align-items: stretch; gap: 7px; padding: 13px 20px; border: 0; border-right: 1px solid var(--line); color: var(--text); white-space: nowrap; transition: background .25s, color .25s; }
+.vehicle-ticker .vehicle-ticker-item:first-child { border-left: 0; }
+.vehicle-ticker .vehicle-ticker-item:hover { background: var(--accent-soft); color: var(--text); }
+.vehicle-ticker .vehicle-ticker-item:focus-visible { position: relative; z-index: 1; outline: 2px solid var(--accent-text); outline-offset: -3px; }
+.vehicle-ticker .vehicle-ticker-item > .ticker-symbol { overflow: hidden; color: var(--faint); font-size: 7px; letter-spacing: .16em; text-overflow: ellipsis; }
+.ticker-quote { display: flex; min-width: 0; align-items: baseline; justify-content: space-between; gap: 8px; }
+.ticker-quote > strong { overflow: hidden; min-width: 0; color: var(--text); font-size: 11px; font-weight: 500; text-overflow: ellipsis; }
+.ticker-price { display: inline-flex; flex: 0 0 auto; align-items: baseline; gap: 4px; color: var(--accent-text); font-size: 11px; font-weight: 600; }
+.ticker-price small { color: var(--muted); font-size: 6px; font-weight: 500; letter-spacing: .08em; }
+@keyframes vehicle-price-scroll { to { transform: translateX(-50%); } }
+
+@media (max-width: 760px) {
+  .vehicle-ticker-label { flex-basis: 164px; padding: 12px 14px 12px 36px; }
+  .vehicle-ticker-label::before { left: 16px; }
+  .vehicle-ticker .vehicle-ticker-item { flex-basis: 210px; padding-inline: 15px; }
+}
+@media (max-width: 520px) {
+  .vehicle-ticker { min-height: 78px; }
+  .vehicle-ticker-label { flex-basis: 116px; gap: 4px; padding: 10px 8px; }
+  .vehicle-ticker-label::before { display: none; }
+  .ticker-kicker { font-size: 6px; letter-spacing: .12em; }
+  .vehicle-ticker-label > strong { font-size: 10px; letter-spacing: .07em; }
+  .ticker-disclaimer { font-size: 5px; letter-spacing: .06em; }
+  .vehicle-ticker .vehicle-ticker-item { flex-basis: 180px; gap: 5px; padding-inline: 12px; }
+  .ticker-quote { align-items: flex-start; flex-direction: column; gap: 2px; }
+  .ticker-quote > strong { font-size: 10px; }
+  .ticker-price { font-size: 10px; }
+}
