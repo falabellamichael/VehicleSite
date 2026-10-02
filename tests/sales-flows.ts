@@ -30,7 +30,7 @@ export function registerSalesFlows(staticHost = false) {
   test("body, condition, mileage and seating filters work", async ({ page, baseURL }) => {
     await go(page, baseURL, "inventory"); await page.getByRole("button", { name: /^SUV/ }).click(); await expect(page.locator(".vehicle-card")).toHaveCount(2);
     await page.getByRole("combobox", { name: "Condition", exact: true }).selectOption("New"); await expect(page.locator(".vehicle-card")).toHaveCount(1); await expect(page.locator(".vehicle-card")).toContainText("Ridge Trail");
-    await page.getByRole("button", { name: "Reset all" }).click(); await page.getByRole("combobox", { name: "Maximum mileage", exact: true }).selectOption("15000"); await expect(page.locator(".vehicle-card")).toHaveCount(3);
+    await page.getByRole("button", { name: "Reset all" }).click(); await expect(page.locator(".vehicle-card")).toHaveCount(9); await page.getByRole("combobox", { name: "Maximum mileage", exact: true }).selectOption("15000"); await expect(page.locator(".vehicle-card")).toHaveCount(3);
     await page.getByRole("checkbox", { name: "Available examples only" }).click(); await expect(page.getByRole("checkbox", { name: "Available examples only" })).toBeChecked(); await expect(page.locator(".vehicle-card")).toHaveCount(2);
     await page.getByRole("combobox", { name: "Seats needed", exact: true }).selectOption("7"); await expect(page.locator(".vehicle-card")).toHaveCount(1); await expect(page.locator(".vehicle-card")).toContainText("Atlas Grand");
   });
