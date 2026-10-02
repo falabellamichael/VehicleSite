@@ -52,3 +52,20 @@ The added checks cover left/right direction and sustained movement; the neutral 
 The background consists of four original SVG design placeholders with optional replacement image slots. It remains decorative and does not capture pointer or touch input. No new dependencies, tracking, external media services, routes, or header changes were introduced. Source changes were authored directly in GitHub; the temporary Windows checkout was used only to verify them. D:\VehicleSite source remains unchanged.
 
 Verification used Microsoft Edge/Chromium, with touch emulation rather than physical-device testing. No Safari or Firefox verification or full manual assistive-technology audit was performed.
+
+
+## Hero carousel overlap fix ? 2026-10-02
+
+Verified application and test revision: `7bf6670152b8566751c28d67b9e45bcfb7a1992f`.
+
+The reported bug was reproduced on the published site: six next-slide clicks increased the mounted hero car images from one to seven. The artwork and details button were sibling elements using the same React key, so older artwork was left mounted during reconciliation.
+
+The artwork and details now use distinct, stable key namespaces. Each selection removes the previous car rather than accumulating another layer. No background, styling, header, vehicle data, or sales-flow changes were needed.
+
+A new regression check was run against the old published revision and failed with two mounted car images after one switch. After the fix, the complete production suite passed: **71 passed, 0 failed**. The six new carousel checks also passed against the development build with no duplicate-key warnings or runtime errors.
+
+The new checks verify repeated forward/backward cycles, direct slide selection, nine automatic transitions while the mouse-led backdrop changes direction, pause/resume, rapid clicks, car-detail synchronization, light/dark themes, mobile reduced-motion controls, and returning home. They check the actual number of mounted media/SVG elements and the selected artwork colour, not only the visible vehicle label.
+
+Desktop and mobile screenshots after repeated transitions were visually reviewed. The existing twelve moving-background checks and all sales-site checks remain passing. Verification used Microsoft Edge/Chromium; this was not a Safari or Firefox test.
+
+Changes were authored directly in GitHub and verified in a temporary checkout. The source working copy at D:\VehicleSite was not modified.
