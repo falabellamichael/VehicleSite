@@ -105,6 +105,19 @@ export function registerHeroBackdropTests() {
       await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-moving", "false");
     });
 
+    test("touch-only browsers keep the artwork still without trapping scrolling", async ({ browser, baseURL }) => {
+      const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "no-preference" });
+      try {
+        const page = await context.newPage();
+        await page.goto(baseURL!);
+        await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-enabled", "false");
+        await page.locator(".hero-main").dispatchEvent("pointermove", { pointerType: "touch", clientX: 300, clientY: 450 });
+        await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-moving", "false");
+        await expect(page.locator(".hero-backdrop-hint")).toBeHidden();
+        expect(await page.locator(".hero-main").evaluate(el => getComputedStyle(el).touchAction)).toBe("auto");
+      } finally { await context.close(); }
+    });
+
     test("scroll and window blur suspend active background motion", async ({ page }) => {
       await point(page, .8);
       await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-moving", "true");

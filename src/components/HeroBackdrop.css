@@ -115,7 +115,8 @@
   .hero-backdrop-hint { bottom: 10px; }
 }
 @media (max-width: 760px) {
-  .hero-backdrop-window { inset: 36% -8px 0; }
+  .hero-backdrop-window { inset: 43% -8px 12px; }
+  .hero-design-caption, .hero-design-code { display: none; }
   .hero-design-track { top: 15px; height: calc(100% - 50px); }
   .hero-backdrop-wash { background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 65%, transparent), color-mix(in srgb, var(--bg) 25%, transparent) 45%, color-mix(in srgb, var(--bg) 30%, transparent) 75%, color-mix(in srgb, var(--bg) 65%, transparent)); }
   .hero-design-caption { bottom: 22px; }
