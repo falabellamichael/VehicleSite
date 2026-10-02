@@ -42,3 +42,13 @@ npm.cmd test
 This is a public, placeholder-only automotive sales front end. It has no live stock feed, real appointment calendar, lender integration, credit application, quote, purchase, deposit, dealer notification, authenticated document storage, or payment processing. Dates are preferences, and exported calendar events are unconfirmed personal reminders. All cars, prices, equipment, and documents are sample content.
 
 Local browser verification used Edge/Chromium. Safari, Firefox, real-device testing, full screen-reader testing, and a complete manual accessibility audit were not performed. Automated accessibility checks are not certification. The financial calculator is illustrative arithmetic, not a jurisdiction-specific tax calculator or lender offer.
+
+## Mouse-led hero backdrop ? 2026-10-02
+
+Application/test revision: 8285d5206c92ce5c94f3ede768c4e03929d751f0. TypeScript validation and the GitHub Pages build passed. The complete production-build suite passed **65/65 checks**, including **12 added hero-backdrop checks**; the original sales-flow and accessibility checks still pass.
+
+The added checks cover left/right direction and sustained movement; the neutral midpoint and pointer exit; separation from the header; foreground links, carousel controls, and vehicle dialogs; the live reduced-motion preference and site motion toggle; touch input and a touch-only emulated browser; scrolling and window blur; repeating-track coverage and page overflow from 320 through 1920 pixels; and dark/light/mobile review screenshots. The dark/light desktop and final mobile hero screenshots were visually reviewed.
+
+The background consists of four original SVG design placeholders with optional replacement image slots. It remains decorative and does not capture pointer or touch input. No new dependencies, tracking, external media services, routes, or header changes were introduced. Source changes were authored directly in GitHub; the temporary Windows checkout was used only to verify them. D:\VehicleSite source remains unchanged.
+
+Verification used Microsoft Edge/Chromium, with touch emulation rather than physical-device testing. No Safari or Firefox verification or full manual assistive-technology audit was performed.
