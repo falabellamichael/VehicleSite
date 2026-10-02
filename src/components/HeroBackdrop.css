@@ -1,0 +1,127 @@
+/* Scoped to the first showroom hero. No header or inventory styles are changed. */
+.sales-hero .hero-main { isolation: isolate; }
+.sales-hero .hero-stage { z-index: 1; }
+.hero-motion-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  color: var(--accent-text);
+  --backdrop-grid-x: 0px;
+}
+.hero-backdrop-window {
+  position: absolute;
+  inset: 12px -18px 6px;
+  overflow: hidden;
+  contain: paint;
+  mask-image: linear-gradient(transparent, #000 12%, #000 84%, transparent);
+}
+.hero-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  opacity: .25;
+  background-image: linear-gradient(90deg, var(--line-strong) 1px, transparent 1px), linear-gradient(var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  background-position: var(--backdrop-grid-x) 0;
+  mask-image: radial-gradient(ellipse at 76% 50%, #000, transparent 75%);
+}
+.hero-design-track {
+  position: absolute;
+  display: flex;
+  width: max-content;
+  height: calc(100% - 80px);
+  top: 34px;
+  transform: translate3d(-33.333333%, 0, 0);
+}
+.hero-motion-backdrop[data-moving="true"] .hero-design-track { will-change: transform; }
+.hero-design-group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 28px;
+  padding-right: 28px;
+  height: 100%;
+}
+.hero-design-panel {
+  position: relative;
+  flex: 0 0 clamp(245px, 24vw, 360px);
+  width: clamp(245px, 24vw, 360px);
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--accent-text) 18%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--accent-text) 9%, var(--bg)), color-mix(in srgb, var(--panel) 60%, transparent) 64%);
+}
+.hero-design-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-top: 2px solid color-mix(in srgb, var(--accent-text) 32%, transparent);
+  background: linear-gradient(transparent 62%, color-mix(in srgb, var(--bg) 54%, transparent));
+}
+.hero-design-panel > svg { position: absolute; width: 100%; height: 100%; inset: 0; opacity: .65; }
+.hero-design-panel > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .58; }
+.hero-design-panel > img[hidden] { display: none; }
+.hero-design-code {
+  position: absolute;
+  top: 19px;
+  left: 21px;
+  font-size: 8px;
+  letter-spacing: .2em;
+  opacity: .55;
+}
+.hero-design-caption {
+  position: absolute;
+  z-index: 1;
+  left: 22px;
+  bottom: 26px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  opacity: .68;
+}
+.hero-design-caption > span { font-size: 29px; font-weight: 300; letter-spacing: -.06em; }
+.hero-design-caption > div { font-size: 12px; letter-spacing: -.02em; }
+.hero-design-caption small { display: block; font-size: 6px; margin-top: 6px; letter-spacing: .18em; }
+.design-architecture { border-radius: 150px 150px 0 0; }
+.design-architecture .hero-design-code { top: 49px; left: 0; right: 0; text-align: center; }
+.design-velocity { background: linear-gradient(155deg, color-mix(in srgb, var(--accent-text) 4%, var(--bg)), color-mix(in srgb, var(--accent-text) 12%, var(--bg))); }
+.design-horizon { border-radius: 2px 100px 2px 2px; }
+.hero-backdrop-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 96%, transparent) 29%, color-mix(in srgb, var(--bg) 77%, transparent) 44%, color-mix(in srgb, var(--bg) 10%, transparent) 65%, color-mix(in srgb, var(--bg) 14%, transparent) 90%, var(--bg) 100%);
+}
+.hero-backdrop-hint {
+  position: absolute;
+  left: 0;
+  bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 7px;
+  letter-spacing: .15em;
+  opacity: .75;
+}
+.hero-backdrop-hint > span:first-child, .hero-backdrop-hint > span:last-child { font-size: 17px; color: var(--faint); }
+.hero-motion-backdrop[data-direction="left"] .backdrop-left,
+.hero-motion-backdrop[data-direction="right"] .backdrop-right { color: var(--accent-text); }
+.hero-motion-backdrop:not([data-enabled="true"]) .hero-backdrop-hint { display: none; }
+:root[data-theme="light"] .hero-design-panel > svg { opacity: .55; }
+:root[data-theme="light"] .hero-design-panel { border-color: color-mix(in srgb, var(--accent-text) 20%, transparent); }
+@media (max-width: 1000px) {
+  .hero-backdrop-window { inset-inline: -10px; }
+  .hero-backdrop-hint { bottom: 10px; }
+}
+@media (max-width: 760px) {
+  .hero-backdrop-window { inset: 36% -8px 0; }
+  .hero-design-track { top: 15px; height: calc(100% - 50px); }
+  .hero-backdrop-wash { background: linear-gradient(90deg, color-mix(in srgb, var(--bg) 65%, transparent), color-mix(in srgb, var(--bg) 25%, transparent) 45%, color-mix(in srgb, var(--bg) 30%, transparent) 75%, color-mix(in srgb, var(--bg) 65%, transparent)); }
+  .hero-design-caption { bottom: 22px; }
+  .hero-backdrop-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .hero-backdrop-hint { display: none; }
+  .hero-design-track { will-change: auto; }
+}
