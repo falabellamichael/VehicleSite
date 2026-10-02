@@ -2,12 +2,12 @@ import { useEffect, useRef, type RefObject } from "react";
 import { publicAsset } from "../lib";
 import "./HeroBackdrop.css";
 
-/** Replace image paths with owned assets; empty slots render original design studies. */
+/** Fictional AI vehicle concepts echo the showroom's demo inventory. */
 const designs = [
-  { id: "contour", title: "Sculpted lines", image: "" },
-  { id: "architecture", title: "Light & space", image: "" },
-  { id: "velocity", title: "Made of motion", image: "" },
-  { id: "horizon", title: "New horizons", image: "" },
+  { id: "contour", title: "Sculpted lines", image: "/media/images/demo/apex.webp" },
+  { id: "architecture", title: "Light & space", image: "/media/images/demo/noir.webp" },
+  { id: "velocity", title: "Made of motion", image: "/media/images/demo/pulse.webp" },
+  { id: "horizon", title: "New horizons", image: "/media/images/demo/atlas.webp" },
 ] as const;
 type Design = (typeof designs)[number]["id"];
 
@@ -175,7 +175,7 @@ export default function HeroBackdrop({ hostRef, motion }: {
                   <span className="hero-design-code">VS / DESIGN STUDY 0{index + 1}</span>
                   <DesignStudy design={design.id} />
                   {design.image && <img src={publicAsset(design.image)} alt="" decoding="async" loading="lazy" onError={event => { event.currentTarget.hidden = true; }} />}
-                  <div className="hero-design-caption"><span>0{index + 1}</span><div>{design.title}<small>VISUAL PLACEHOLDER</small></div></div>
+                  <div className="hero-design-caption"><span>0{index + 1}</span><div>{design.title}<small>FICTIONAL VEHICLE CONCEPT</small></div></div>
                 </div>
               ))}
             </div>

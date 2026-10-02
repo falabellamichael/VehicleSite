@@ -160,6 +160,7 @@ export function MediaSlot({
 }) {
   const [failed, setFailed] = useState(false);
   const source = src || vehicle?.image;
+  const conceptLabel = vehicle ? "AI-GENERATED VEHICLE CONCEPT" : label;
   return (
     <div
       className={`media-slot media-${kind} ${className}`}
@@ -168,12 +169,16 @@ export function MediaSlot({
       }
     >
       {source && !failed ? (
-        <img
-          src={publicAsset(source)}
-          alt={vehicle?.name ?? `${kind} photography`}
-          loading="lazy"
-          onError={() => setFailed(true)}
-        />
+        <>
+          <img
+            src={publicAsset(source)}
+            alt={vehicle ? `AI-generated concept image of fictional ${vehicle.name}, a ${vehicle.category.toLowerCase()}.` : label}
+            loading={className.includes("hero-media") ? "eager" : "lazy"}
+            decoding="async"
+            onError={() => setFailed(true)}
+          />
+          <span className="media-concept-tag" aria-hidden="true"><span className="tiny-square" />{conceptLabel}</span>
+        </>
       ) : (
         <>
           <div className="scene-grid" aria-hidden="true" />
