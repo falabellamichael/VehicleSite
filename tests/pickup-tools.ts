@@ -215,6 +215,8 @@ export function registerPickupToolsTests() {
           if (step === 2) { await prepare(page); await page.getByRole("checkbox").first().check(); }
           if (step === 3) await page.getByRole("button", { name: "Review my plan", exact: true }).click();
           await page.evaluate(() => document.fonts.ready);
+          await expect.poll(() => page.locator(".pickup-summary-visual img").evaluate(el => (el as HTMLImageElement).complete && (el as HTMLImageElement).naturalWidth > 0)).toBe(true);
+          await page.evaluate(() => { if (document.activeElement instanceof HTMLElement) document.activeElement.blur(); window.scrollTo({ top: 0, behavior: "instant" }); });
           await page.screenshot({ path: `.artifacts/pickup-review/after-${theme}-${width}-step-${step}.png`, fullPage: true });
         }
       }
