@@ -137,6 +137,7 @@ export function registerBuyingToolsTests() {
       await page.setViewportSize({ width: 390, height: 844 });
       const shortcut = page.locator(".buying-mobile-estimate");
       await expect(shortcut).toBeVisible();
+      await expect(page.locator(".buying-next-copy h2 br")).toHaveCSS("display", "inline");
       await shortcut.click();
       await expect(page).toHaveURL(/#buying-summary$/);
       await expect(page.locator("#buying-summary")).toBeInViewport();

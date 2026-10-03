@@ -205,7 +205,7 @@ export default function Buying() {
                         ["02", "See the actual car", "Arrange a test drive and ask about history, condition, and inspection records.", "Make space for your questions"],
                         ["03", "Get the written picture", "Ask for an itemized price, a written trade-in appraisal, and applicable terms.", "Review the actual documents"],
                         ["04", "Prepare for the handover", "Agree a pickup date and confirm the required documents and payment arrangements.", "Confirm everything with the seller"],
-                      ].map(([number, title, text, note]) => <div key={number}><span>{number}</span><div><small>{note}</small><h3>{title}</h3><p>{text}</p></div><Check size={15} aria-hidden="true" /></div>)}
+                      ].map(([number, title, text, note]) => <div key={number}><span>{number}</span><div><small>{note}</small><h3>{title}</h3><p>{text}</p></div><ArrowRight size={15} aria-hidden="true" /></div>)}
                     </div>
                     <div className="buying-cash-actions"><Link className="button button-gold" to="/documents/purchase-options">Explore purchase documents<ArrowUpRight size={16} /></Link><button className="text-link" onClick={() => query("tab", "payment")}>Adjust the price, tax, and fee assumptions<ArrowUpRight size={15} /></button></div>
                   </>}

@@ -182,7 +182,6 @@
   .buying-summary-actions { grid-template-columns: 1fr 1fr; }
   .buying-next-steps { grid-template-columns: 1fr 1fr; }
   .buying-next-copy { grid-column: 1 / -1; padding-top: 0; }
-  .buying-next-copy h2 br { display: none; }
   .buying-next-copy > p { max-width: 550px; }
 }
 @media (max-width: 600px) {
