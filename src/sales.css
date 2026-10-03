@@ -7,6 +7,13 @@
 .sales-hero-price { color: var(--accent-text); font-size: 20px; }
 .sales-hero-price small { display: block; color: var(--muted); font: 10px "Manrope Variable", sans-serif; margin-top: 5px; }
 .sales-demo-note { display: flex; align-items: center; gap: 20px; padding: 16px 20px; border: 1px solid var(--line); background: var(--accent-soft); margin-bottom: 28px; }
+.showroom-pagination-wrap { display: flex; justify-content: center; margin-top: 28px; }
+.showroom-pagination { display: flex; align-items: center; gap: 6px; }
+.showroom-pagination button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-strong); background: transparent; color: var(--muted); font-size: 13px; transition: color .2s, border-color .2s, background .2s; }
+.showroom-pagination button:hover:not(:disabled) { color: var(--text); border-color: var(--accent-text); background: var(--accent-soft); }
+.showroom-pagination button[aria-current="page"] { color: var(--accent-text); border-color: var(--accent-text); background: var(--accent-soft); }
+.showroom-pagination button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }
+.showroom-pagination button:disabled { opacity: .4; cursor: not-allowed; }
 .sales-demo-note .demo-badge { flex-shrink: 0; }
 .sales-demo-note p { font-size: 12px; line-height: 1.7; }
 .sales-field { display: flex; flex-direction: column; gap: 9px; color: var(--muted); font-size: 12px; line-height: 1.5; min-width: 0; }

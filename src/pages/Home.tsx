@@ -18,6 +18,11 @@ const tickerFilters: { id: TickerFilter; label: string; matches: (vehicle: Vehic
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const [slide, setSlide] = useState(0); const [paused, setPaused] = useState(false); const [tickerPaused, setTickerPaused] = useState(false); const [tickerFilter, setTickerFilter] = useState<TickerFilter>("all"); const { setModal, motion, saved } = useSite();
+  const [featuredPage, setFeaturedPage] = useState(1);
+  const featuredPageSize = 3;
+  const featuredPageCount = Math.max(1, Math.ceil(vehicles.length / featuredPageSize));
+  const featuredStart = (featuredPage - 1) * featuredPageSize;
+  const featuredCars = vehicles.slice(featuredStart, featuredStart + featuredPageSize);
   const [budget, setBudget] = useState("70000"); const [use, setUse] = useState("everyday"); const [fuel, setFuel] = useState("");
   // Artwork and details are siblings: distinct key namespaces prevent orphaned cars.
   const vehicle = vehicles[slide];
@@ -44,7 +49,22 @@ export default function Home() {
     <div className="vehicle-ticker-window"><div key={tickerFilter} className={`vehicle-ticker-track${tickerPaused ? " ticker-paused" : ""}`}><TickerRun cars={tickerVehicles} /><TickerRun cars={tickerVehicles} clone /></div></div>
   </section>
   <section className="section container" id="finder"><div className="sales-finder reveal"><div><Eyebrow>01 / A little less guesswork</Eyebrow><h2>What does your<br /><em>next car feel like?</em></h2><p>Start with your life, not a spec sheet. This finder matches your choices against the sample inventory—no account or AI service required.</p></div><div className="sales-finder-controls"><label className="sales-field">My everyday looks like<select value={use} onChange={e => setUse(e.target.value)}><option value="everyday">A bit of everything</option><option value="family">Family life · 7 seats</option><option value="weekend">A driver's weekend · coupe</option><option value="adventure">Room for adventure · SUV</option></select></label><label className="sales-field">My sample price ceiling <strong>{money(Number(budget))} CAD</strong><input aria-label="Finder budget" type="range" min="20000" max="80000" step="1000" value={budget} onChange={e => setBudget(e.target.value)} /></label><label className="sales-field">My energy preference<select value={fuel} onChange={e => setFuel(e.target.value)}><option value="">Open to anything</option><option>Petrol</option><option>Hybrid</option><option>Electric</option></select></label><div className="sales-finder-result"><span role="status"><strong>{matches.length}</strong> sample {matches.length === 1 ? "match" : "matches"}</span><Link className="button button-gold" to={`/inventory?${fitParams}`}>{matches.length ? "See my matches" : "Explore & adjust"}<ArrowUpRight size={17} /></Link></div><p className="sales-fineprint">Filters only. Matches use fictional stock, not suitability advice. Prices exclude tax and fees.</p></div></div></section>
-  <section className="section container sales-featured"><SectionHeading label="02 / The showroom edit" title="Different cars." italic="Same possibility." to="/inventory" link="View all 9 sample cars" /><DemoNote /><div className="vehicle-grid">{vehicles.slice(0, 3).map((v, i) => <VehicleCard key={v.id} vehicle={v} index={i} />)}</div></section>
+  <section className="section container sales-featured">
+    <SectionHeading label="02 / The showroom edit" title="Different cars." italic="Same possibility." to="/inventory" link="View all 9 sample cars" />
+    <DemoNote />
+    <div className="vehicle-grid" id="showroom-vehicles">{featuredCars.map((v, i) => <VehicleCard key={v.id} vehicle={v} index={i} />)}</div>
+    <div className="showroom-pagination-wrap">
+      <nav className="showroom-pagination" aria-label="Showroom pages">
+        <button type="button" aria-label="Previous showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === 1} onClick={() => setFeaturedPage(page => page - 1)}><ArrowLeft size={16} aria-hidden="true" /></button>
+        {Array.from({ length: featuredPageCount }, (_, index) => {
+          const pageNumber = index + 1;
+          return <button key={pageNumber} type="button" aria-label={"Showroom page " + pageNumber} aria-controls="showroom-vehicles" aria-current={featuredPage === pageNumber ? "page" : undefined} onClick={() => setFeaturedPage(pageNumber)}>{pageNumber}</button>;
+        })}
+        <button type="button" aria-label="Next showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === featuredPageCount} onClick={() => setFeaturedPage(page => page + 1)}><ArrowRight size={16} aria-hidden="true" /></button>
+      </nav>
+      <span className="sr-only" role="status" aria-live="polite">{vehicles.length ? "Showing " + (featuredStart + 1) + " to " + (featuredStart + featuredCars.length) + " of " + vehicles.length + " sample cars" : "No sample cars available"}</span>
+    </div>
+  </section>
   <section className="section container"><SectionHeading label="03 / More than a listing" title="A smarter way" italic="to explore." /><div className="sales-benefits">{benefits.map(({ Icon, title, copy, to, label }, i) => <Link className="sales-benefit reveal" to={to} key={title}><div><Icon size={25} /><span className="micro">0{i + 1}</span></div><h3>{title}</h3><p>{copy}</p><span className="text-link">{label}<ArrowUpRight size={16} /></span></Link>)}</div></section>
   <section className="editorial-section container section"><div className="editorial-visual reveal"><MediaSlot kind="architecture" src="/media/images/demo/showroom.webp" label="AI-GENERATED SHOWROOM CONCEPT" /><div className="editorial-stamp"><em>Your keys.</em><span>YOUR NEXT CHAPTER.</span></div></div><div className="editorial-copy reveal"><Eyebrow>04 / The moment it becomes yours</Eyebrow><h2>That first drive.<br /><em>Make room for it.</em></h2><p>Car shopping should lead somewhere. Pick your preferred handover date, work through a preparation checklist, and keep everything in one personal visit draft.</p><p>No pretend reservations. No surprise submissions. Your date is a preference until a real seller confirms it.</p><Link className="text-link" to="/pickup?purpose=pickup">Plan pickup day<ArrowUpRight size={18} /></Link><div className="editorial-signature"><span />THE START OF SOMETHING YOURS.</div></div></section>
   <section className="section container sales-faq"><div><Eyebrow>A few useful answers</Eyebrow><h2>Before you<br /><em>take the wheel.</em></h2></div><div>{faqs.map(([question, answer]) => <details className="sales-question" key={question}><summary>{question}<PlusIcon /></summary><p>{answer}</p></details>)}</div></section><JourneyCTA /></>;
