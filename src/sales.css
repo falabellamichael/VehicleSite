@@ -10,6 +10,7 @@
 .showroom-pagination-wrap { display: flex; justify-content: center; margin-top: 28px; }
 .showroom-pagination { display: flex; align-items: center; gap: 6px; }
 .showroom-pagination button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--line-strong); background: transparent; color: var(--muted); font-size: 13px; transition: color .2s, border-color .2s, background .2s; }
+.showroom-pagination button.pagination-arrow { border: 0; }
 .showroom-pagination button:hover:not(:disabled) { color: var(--text); border-color: var(--accent-text); background: var(--accent-soft); }
 .showroom-pagination button[aria-current="page"] { color: var(--accent-text); border-color: var(--accent-text); background: var(--accent-soft); }
 .showroom-pagination button:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 3px; }

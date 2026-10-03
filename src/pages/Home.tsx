@@ -55,12 +55,12 @@ export default function Home() {
     <div className="vehicle-grid" id="showroom-vehicles">{featuredCars.map((v, i) => <VehicleCard key={v.id} vehicle={v} index={i} />)}</div>
     <div className="showroom-pagination-wrap">
       <nav className="showroom-pagination" aria-label="Showroom pages">
-        <button type="button" aria-label="Previous showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === 1} onClick={() => setFeaturedPage(page => page - 1)}><ArrowLeft size={16} aria-hidden="true" /></button>
+        <button className="pagination-arrow" type="button" aria-label="Previous showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === 1} onClick={() => setFeaturedPage(page => page - 1)}><ArrowLeft size={16} aria-hidden="true" /></button>
         {Array.from({ length: featuredPageCount }, (_, index) => {
           const pageNumber = index + 1;
           return <button key={pageNumber} type="button" aria-label={"Showroom page " + pageNumber} aria-controls="showroom-vehicles" aria-current={featuredPage === pageNumber ? "page" : undefined} onClick={() => setFeaturedPage(pageNumber)}>{pageNumber}</button>;
         })}
-        <button type="button" aria-label="Next showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === featuredPageCount} onClick={() => setFeaturedPage(page => page + 1)}><ArrowRight size={16} aria-hidden="true" /></button>
+        <button className="pagination-arrow" type="button" aria-label="Next showroom page" aria-controls="showroom-vehicles" disabled={featuredPage === featuredPageCount} onClick={() => setFeaturedPage(page => page + 1)}><ArrowRight size={16} aria-hidden="true" /></button>
       </nav>
       <span className="sr-only" role="status" aria-live="polite">{vehicles.length ? "Showing " + (featuredStart + 1) + " to " + (featuredStart + featuredCars.length) + " of " + vehicles.length + " sample cars" : "No sample cars available"}</span>
     </div>
