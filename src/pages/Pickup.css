@@ -15,7 +15,7 @@
 .pickup-page .pickup-stepper li { min-width: 0; display: block; }
 .pickup-stepper button { display: flex; gap: 10px; align-items: center; text-align: left; padding: 0; width: 100%; }
 .pickup-page .pickup-stepper button:disabled { opacity: 1; cursor: default; }
-.pickup-step-number { flex: 0 0 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--muted); background: var(--bg); font-size: 10px; }
+.pickup-step-number { width: 32px; min-width: 32px; flex: 0 0 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--muted); background: var(--bg); font-size: 10px; }
 .pickup-step-copy { display: grid; gap: 5px; }
 .pickup-step-copy strong { color: var(--muted); font-size: 11px; font-weight: 500; line-height: 1.4; }
 .pickup-step-copy small { color: var(--faint); font-size: 8px; line-height: 1.7; }
@@ -46,7 +46,7 @@
 .pickup-fieldset > legend { padding: 0 12px 0 0; font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: -.01em; line-height: 1.6; }
 .pickup-fieldset > legend > span { font-size: 10px; color: var(--accent-text); margin-right: 11px; }
 .pickup-page .sales-field { gap: 9px; color: var(--muted); font-size: 11px; line-height: 1.7; }
-.pickup-page .sales-field input, .pickup-page .sales-field select, .pickup-page .sales-field textarea { background: var(--visit-control); border: 1px solid var(--line-strong); border-radius: 8px; min-height: 50px; padding: 13px 14px; font-size: 14px; line-height: 1.5; color: var(--text); transition: border-color .2s, box-shadow .2s; }
+.pickup-page .sales-field input:not([type="range"]), .pickup-page .sales-field select, .pickup-page .sales-field textarea { background: var(--visit-control); border: 1px solid var(--line-strong); border-radius: 8px; min-height: 50px; padding: 13px 14px; font-size: 14px; line-height: 1.5; color: var(--text); transition: border-color .2s, box-shadow .2s; }
 .pickup-page .sales-field input:hover, .pickup-page .sales-field select:hover, .pickup-page .sales-field textarea:hover { border-color: var(--faint); }
 .pickup-page .sales-field input:focus-visible, .pickup-page .sales-field select:focus-visible, .pickup-page .sales-field textarea:focus-visible { outline-offset: 3px; border-color: var(--accent-text); box-shadow: 0 0 0 3px var(--accent-soft); }
 .pickup-page .sales-field input[aria-invalid="true"], .pickup-page .sales-field select[aria-invalid="true"] { border-style: dashed; border-color: var(--accent-text); }
@@ -247,7 +247,7 @@
   .pickup-page .pickup-purpose-caption { font-size: 10px; }
   .pickup-purpose small { font-size: 8px; line-height: 1.7; }
   .pickup-fieldset > legend, .pickup-page .sales-time-field.pickup-fieldset legend { font-size: 12px; }
-  .pickup-page .sales-field input, .pickup-page .sales-field select, .pickup-page .sales-field textarea { font-size: 16px; min-height: 51px; }
+  .pickup-page .sales-field input:not([type="range"]), .pickup-page .sales-field select, .pickup-page .sales-field textarea { font-size: 16px; min-height: 51px; }
   .pickup-date-input-row { grid-template-columns: 1fr; gap: 12px; }
   .pickup-date-range { display: none; }
   .pickup-page .pickup-date-rail { gap: 5px; }
