@@ -164,7 +164,7 @@ export function registerPickupToolsTests() {
       await page.setViewportSize({ width: 390, height: 844 });
       await expect(page.locator(".pickup-mobile-summary")).toBeVisible();
       await expect(page.locator(".pickup-step-number").first()).toHaveCSS("width", "32px");
-      await expect(page.getByLabel("Preferred date", { exact: true })).toHaveCSS("border-radius", "8px");
+      await expect(page.getByLabel("Preferred date", { exact: true })).toHaveCSS("border-radius", "0px");
       await page.locator(".pickup-mobile-summary").click();
       await expect(page).toHaveURL(/#pickup-summary$/);
       await expect(page.locator("#pickup-summary")).toBeInViewport();
