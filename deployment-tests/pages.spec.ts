@@ -7,5 +7,5 @@ test("deployed assets and metadata use the VehicleSite project path", async ({ p
   expect(assets.length).toBeGreaterThan(0);
   for (const asset of assets) { expect(asset).toMatch(/^\/VehicleSite\/assets\//); const response = await request.get(new URL(asset!, baseURL!).href); expect(response.status()).toBe(200); }
   const response = await request.get(new URL("deployment.json", baseURL!).href); expect(response.status()).toBe(200);
-  const metadata = await response.json(); expect(metadata.edition).toBe("automotive-sales"); expect(metadata.pages).toBe(9); expect(metadata.redirects).toBe(6);
+  const metadata = await response.json(); expect(metadata.edition).toBe("automotive-sales"); expect(metadata.pages).toBe(10); expect(metadata.redirects).toBe(6);
 });

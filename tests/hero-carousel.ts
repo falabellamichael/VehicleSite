@@ -19,7 +19,7 @@ async function expectSingleCar(page: Page, index: number) {
 }
 
 async function openHome(page: Page, baseURL: string | undefined) {
-  await page.goto(baseURL!);
+  await page.goto(new URL("showroom/", baseURL!).href);
   await expectSingleCar(page, 0);
 }
 

@@ -14,7 +14,7 @@ export function registerHeroBackdropTests() {
   test.describe("Mouse-led hero background", () => {
     test.use({ reducedMotion: "no-preference" });
     test.beforeEach(async ({ page, baseURL }) => {
-      await page.goto(baseURL!);
+      await page.goto(new URL("showroom/", baseURL!).href);
       await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-enabled", "true");
     });
 
@@ -109,7 +109,7 @@ export function registerHeroBackdropTests() {
       const context = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: "no-preference" });
       try {
         const page = await context.newPage();
-        await page.goto(baseURL!);
+        await page.goto(new URL("showroom/", baseURL!).href);
         await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-enabled", "false");
         await page.locator(".hero-main").dispatchEvent("pointermove", { pointerType: "touch", clientX: 300, clientY: 450 });
         await expect(page.locator(".hero-motion-backdrop")).toHaveAttribute("data-moving", "false");

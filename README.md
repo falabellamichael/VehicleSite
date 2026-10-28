@@ -1,6 +1,6 @@
-# VehicleSite — automotive sales edition
+# VehicleSite — car sales and mechanical services
 
-**Drive your next chapter.** A cinematic dealership front end: inventory, buying tools, test-drive and pickup planning, and a buyer-document library. The SICKOS-inspired editorial layout, dark/champagne styling, motion, and light theme remain; the service/rental/concierge business model has been replaced with car sales.
+**Car sales. Expert care. One garage.** The Harlan Street Garage cover introduces both car sales and mechanical services, with featured demo cars, interactive inspections, and sample service paperwork. The cinematic showroom, inventory, buying tools, test-drive and pickup planning, and buyer-document library remain available.
 
 Live site: https://falabellamichael.github.io/VehicleSite/
 
@@ -8,7 +8,8 @@ Live site: https://falabellamichael.github.io/VehicleSite/
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Cinematic showroom, lifestyle finder, featured cars, buying journey, FAQs |
+| `/` | Garage cover: car sales, servicing, interactive inspection, estimates, and a sample service request |
+| `/showroom` | Cinematic showroom, lifestyle finder, featured cars, buying journey, FAQs |
 | `/inventory` | Nine fictional listings; combinable filters; saved cars; comparison; detail galleries and share links |
 | `/buying` | Payment studio, trade-in notebook, cash-purchase preparation |
 | `/pickup` | Test-drive or pickup preference; future dates; preparation checklist; downloadable visit draft and tentative calendar reminder |
@@ -42,17 +43,18 @@ This is a **public static demo**, not authenticated document storage. Never put 
 ## Content and media editing
 
 - `src/data.ts`: fictional inventory, sales prices, specifications, status, gallery slots, navigation, document metadata, FAQs, and preparation checklists.
-- `src/pages/`: the five main page components. Document category pages share `Documents.tsx`.
+- `src/garage/`: isolated cover design, Three.js inspection lighting, spring-driven lamp, findings, sample estimates, and local-only service form.
+- `src/pages/`: the five sales page components. Document category pages share `Documents.tsx`.
 - `src/sales.ts`: filtering, amount formatting, amortization, date validation, and calendar export helpers.
 - `src/App.tsx`: shell, themes, search, comparison, vehicle dialogs, and old-link redirects.
 - `src/styles.css`: original design system. `src/sales.css`: sales-edition layouts and responsive additions.
 - `public/media/images/demo/`: AI-generated transparent car cutouts and a fictional showroom scene. The Home hero backdrop reuses four car cutouts. Replace them with approved, owned/licensed imagery when real listings and dealership assets are provided. `public/media/` also contains video slots; videos remain placeholders.
 - `public/documents/`: twelve public, clearly labeled draft text templates. Replace only with approved, non-private content.
-- `scripts/pages-routes.json`: nine page routes plus six legacy redirect entry points. Keep it synchronized when adding routes.
+- `scripts/pages-routes.json`: ten page routes plus six legacy redirect entry points. Keep it synchronized when adding routes.
 
 ## Development and verification
 
-Node.js 24 is used by the existing deployment workflow. The existing lockfile and dependencies are unchanged.
+Node.js 24 is used by the existing deployment workflow. The garage cover adds Three.js 0.170 and locally served Reddit Mono and Sofia Sans Extra Condensed fonts. Vite is patched to 8.3.5.
 
 ```powershell
 npm.cmd ci
@@ -77,6 +79,12 @@ The same sales-flow tests run against development and production builds. They co
 
 ## Publishing
 
-Pushes to `main` trigger `.github/workflows/pages.yml`: install locked dependencies, build the static site, run the Pages suite, and publish only after it passes. The hosted website does not depend on a local server or a PC remaining on. This sales remap is authored directly against GitHub; a separate temporary checkout is used only for verification, without changing `D:\VehicleSite`.
+Pushes to `main` trigger `.github/workflows/pages.yml`: install locked dependencies, build the static site, run the Pages suite, and publish only after it passes. The hosted website does not depend on a local server or a PC remaining on. The garage cover is integrated with the current sales edition in `D:\VehicleSite`.
 
 A local checkout can be brought up to date later using `git pull --ff-only` when it has no conflicting local work.
+
+## Harlan Street Garage cover
+
+The cover uses locally served Pexels photographs and depth maps computed with Depth Anything V2 Small. Credits and model provenance are in `public/media/garage/README.md`. Three.js loads dynamically for visible inspection scenes, rendering pauses off-screen and in hidden tabs, and reduced motion disables automatic lamp travel. Sound is opt-in. A static photo remains available if WebGL fails.
+
+The estimate uses integer cents and illustrative USD amounts, separate from the showroom’s sample CAD vehicle prices. Changing selected repairs clears the sample approval. The labor guide and business hours are illustrative; the service form validates locally, displays a RECEIVED stamp, and neither transmits nor persists personal information. The fictional shop, certifications, warranty, customer notes, inspection findings, and estimates are not verified business claims. Mobile LCP below two seconds has not been certified on a midrange phone.

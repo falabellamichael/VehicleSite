@@ -4,7 +4,7 @@ import { readFile, mkdir } from "node:fs/promises";
 import { documentGroups } from "../src/data";
 import { calculatePayment, dayFromToday, makeCalendar, visitDateValid } from "../src/sales";
 export const salesRoutes = [
-  ["", "Not just a car."], ["inventory", "Your next chapter."], ["buying", "The numbers."], ["pickup", "The keys."], ["documents", "The details."],
+  ["", "CAR SALES."], ["showroom", "Not just a car."], ["inventory", "Your next chapter."], ["buying", "The numbers."], ["pickup", "The keys."], ["documents", "The details."],
   ["documents/vehicle-records", "Vehicle records."], ["documents/purchase-options", "Purchase options."], ["documents/pickup-essentials", "Pickup essentials."], ["documents/policies", "Policies & essentials."],
 ] as const;
 const go = (page: Page, baseURL: string | undefined, path = "") => page.goto(new URL(path, baseURL!).href);
@@ -14,7 +14,8 @@ export function registerSalesFlows(staticHost = false) {
     const errors: string[] = []; page.on("pageerror", e => errors.push(e.message));
     const response = await go(page, baseURL, path); expect(response?.status()).toBe(200);
     await expect(page.getByRole("heading", { level: 1 })).toContainText(heading);
-    await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Inventory", exact: true })).toBeVisible();
+    if (path === "") await expect(page.getByRole("link", { name: "Browse cars", exact: true })).toBeVisible();
+    else await expect(page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Inventory", exact: true })).toBeVisible();
     await page.reload(); await expect(page.getByRole("heading", { level: 1 })).toContainText(heading); await expect(page).toHaveTitle(/VehicleSite/); expect(errors).toEqual([]);
   });
   test("legacy links redirect while preserving car selection", async ({ page, baseURL }) => {
@@ -50,10 +51,10 @@ export function registerSalesFlows(staticHost = false) {
     for (const id of ["vista", "ridge"]) { await go(page, baseURL, `inventory?vehicle=${id}`); await expect(page.getByRole("dialog").getByRole("link", { name: "Plan a test drive" })).toHaveCount(0); await page.getByRole("button", { name: "Close dialog" }).click(); await go(page, baseURL, `pickup?vehicle=${id}`); await page.getByRole("button", { name: "Prepare my visit" }).click(); await expect(page.getByRole("alert")).toContainText("not available for visit planning"); }
   });
   test("home carousel and showroom film keep intentional placeholders", async ({ page, baseURL }) => {
-    await go(page, baseURL); await page.getByRole("button", { name: "Next vehicle", exact: true }).click(); await expect(page.locator(".sales-hero-tag")).toContainText("Noir Executive"); await page.getByRole("button", { name: "Inside the showroom" }).click(); await expect(page.getByRole("dialog")).toContainText("not a playable video"); await page.keyboard.press("Escape"); await expect(page.getByRole("dialog")).toHaveCount(0);
+    await go(page, baseURL, "showroom"); await page.getByRole("button", { name: "Next vehicle", exact: true }).click(); await expect(page.locator(".sales-hero-tag")).toContainText("Noir Executive"); await page.getByRole("button", { name: "Inside the showroom" }).click(); await expect(page.getByRole("dialog")).toContainText("not a playable video"); await page.keyboard.press("Escape"); await expect(page.getByRole("dialog")).toHaveCount(0);
   });
   test("lifestyle finder transfers matching filters into inventory", async ({ page, baseURL }) => {
-    await go(page, baseURL); await page.getByRole("combobox", { name: "My everyday looks like", exact: true }).selectOption("family"); await page.getByRole("combobox", { name: "My energy preference", exact: true }).selectOption("Hybrid"); await expect(page.locator(".sales-finder-result")).toContainText("1 sample match"); await page.getByRole("link", { name: "See my matches" }).click(); await expect(page.locator(".vehicle-card")).toHaveCount(1); await expect(page.locator(".vehicle-card")).toContainText("Suite Touring"); await expect(page).toHaveURL(/seats=7/);
+    await go(page, baseURL, "showroom"); await page.getByRole("combobox", { name: "My everyday looks like", exact: true }).selectOption("family"); await page.getByRole("combobox", { name: "My energy preference", exact: true }).selectOption("Hybrid"); await expect(page.locator(".sales-finder-result")).toContainText("1 sample match"); await page.getByRole("link", { name: "See my matches" }).click(); await expect(page.locator(".vehicle-card")).toHaveCount(1); await expect(page.locator(".vehicle-card")).toContainText("Suite Touring"); await expect(page).toHaveURL(/seats=7/);
   });
   test("payment calculator handles zero APR and an exact monthly result", async ({ page, baseURL }) => {
     await go(page, baseURL, "buying?vehicle=metro"); await page.getByLabel("Vehicle price (CAD)", { exact: true }).fill("10000"); await page.getByLabel("Down payment (CAD)", { exact: true }).fill("1000"); await page.getByLabel("APR (%) — illustrative", { exact: true }).fill("0"); await page.getByRole("combobox", { name: "Loan term", exact: true }).selectOption("36"); await expect(page.getByLabel("Estimated monthly payment", { exact: true })).toContainText("$250.00"); const event = page.waitForEvent("download"); await page.getByRole("button", { name: "Save this scenario" }).click(); const file = await event; const text = await readFile((await file.path())!, "utf8"); expect(text).toContain("$250.00"); expect(text).toContain("DEMO — NOT AN OFFER");
@@ -98,13 +99,13 @@ export function registerSalesFlows(staticHost = false) {
     await go(page, baseURL); await page.keyboard.press("Control+k"); await page.getByRole("combobox", { name: "Search pages, cars, and documents" }).fill("purchase"); await page.keyboard.press("ArrowDown"); await page.keyboard.press("Enter"); await expect(page).toHaveURL(/documents\/purchase-options/);
   });
   test("mobile menu supports navigation and Escape focus restoration", async ({ page, baseURL }) => {
-    await page.setViewportSize({ width: 390, height: 844 }); await go(page, baseURL); await page.getByRole("button", { name: "Open menu", exact: true }).click(); await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Pickup & test drives", exact: true }).click(); await expect(page.getByRole("heading", { level: 1 })).toContainText("The keys."); await page.getByRole("button", { name: "Open menu", exact: true }).click(); await page.keyboard.press("Escape"); await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
+    await page.setViewportSize({ width: 390, height: 844 }); await go(page, baseURL, "showroom"); await page.getByRole("button", { name: "Open menu", exact: true }).click(); await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link", { name: "Pickup & test drives", exact: true }).click(); await expect(page.getByRole("heading", { level: 1 })).toContainText("The keys."); await page.getByRole("button", { name: "Open menu", exact: true }).click(); await page.keyboard.press("Escape"); await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
   });
   test("theme persists and malformed saved state recovers safely", async ({ page, baseURL }) => {
     await go(page, baseURL, "inventory"); await page.getByRole("button", { name: "Switch to light theme" }).click(); await page.reload(); await expect(page.locator("html")).toHaveAttribute("data-theme", "light"); await page.evaluate(() => localStorage.setItem("vehiclesite.saved.v1", "broken-json")); await page.reload(); await expect(page.getByRole("button", { name: "Saved (0)", exact: true })).toBeVisible();
   });
   test("reduced-motion preference and explicit motion toggle work", async ({ page, baseURL }) => {
-    await go(page, baseURL); await expect(page.locator("html")).toHaveAttribute("data-motion", "off"); await page.getByRole("button", { name: "Enable animations" }).click(); await expect(page.locator("html")).toHaveAttribute("data-motion", "on"); await page.getByRole("button", { name: "Pause animations" }).click(); await expect(page.locator("html")).toHaveAttribute("data-motion", "off");
+    await go(page, baseURL, "showroom"); await expect(page.locator("html")).toHaveAttribute("data-motion", "off"); await page.getByRole("button", { name: "Enable animations" }).click(); await expect(page.locator("html")).toHaveAttribute("data-motion", "on"); await page.getByRole("button", { name: "Pause animations" }).click(); await expect(page.locator("html")).toHaveAttribute("data-motion", "off");
   });
   test("all sales pages fit narrow mobile through desktop", async ({ page, baseURL }) => {
     test.setTimeout(120000); for (const width of [320, 390, 768, 1024, 1440]) { await page.setViewportSize({ width, height: 950 }); for (const [path] of salesRoutes) { await go(page, baseURL, path); await expect(page.getByRole("heading", { level: 1 })).toBeVisible(); const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth); expect(overflow, `${path || "home"} at ${width}px`).toBeLessThanOrEqual(1); } }

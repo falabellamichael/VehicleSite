@@ -1,5 +1,6 @@
 [
-  { "path": "", "title": "Drive your next chapter" },
+  { "path": "", "title": "Harlan Street Garage" },
+  { "path": "showroom", "title": "Showroom" },
   { "path": "inventory", "title": "Inventory" },
   { "path": "buying", "title": "Buying tools" },
   { "path": "pickup", "title": "Pickup & test drives" },

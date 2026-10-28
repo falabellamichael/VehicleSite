@@ -21,7 +21,7 @@ export const vehicles: Vehicle[] = [
   { id: "volt", name: "Volt City", category: "Sedan", edition: "Urban · Electric", year: 2023, price: 28900, mileage: 23900, seats: 5, bags: 2, power: "Electric", transmission: "Single speed", drivetrain: "Front-wheel drive", condition: "Pre-owned", stock: "Available", stockNumber: "DEMO-009", description: "Small footprint. Fresh perspective. A compact electric example for shoppers exploring a different everyday drive.", mood: "For the city", color: "#9fb39e", kind: "sedan", image: "/media/images/demo/volt.webp", features: ["Heated seats", "Phone connectivity", "Parking sensors", "Charging cable slot"], gallery: gallery("/media/images/demo/volt.webp") },
 ];
 export const categories = ["All styles", ...new Set(vehicles.map(v => v.category))];
-export const navigation = [["/", "Home"], ["/inventory", "Inventory"], ["/buying", "Buying tools"], ["/pickup", "Pickup & test drives"], ["/documents", "Documents"]] as const;
+export const navigation = [["/", "Home"], ["/showroom", "Showroom"], ["/inventory", "Inventory"], ["/buying", "Buying tools"], ["/pickup", "Pickup & test drives"], ["/documents", "Documents"]] as const;
 export const documentGroups = [
   { id: "vehicle-records", name: "Vehicle records", number: "01", icon: "car", description: "The facts behind the car: specification sheets, history questions, and inspection notes.", docs: [
     { id: "vehicle-specifications", title: "Vehicle specification sheet", description: "Fields for verified equipment, mileage, and identification.", pages: "Reference" },
