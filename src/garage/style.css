@@ -3,6 +3,9 @@
   background: #0b0a09;
   scroll-padding-top: 90px;
 }
+:root[data-garage="true"] body {
+  min-width: 0;
+}
 .hg-page {
   --hg-bg: #0b0a09;
   --hg-paper: #efe9dc;
@@ -239,7 +242,7 @@
 }
 .hg-copy-tabs small {
   font-size: 8px;
-  color: #5b5145;
+  color: #40382f;
 }
 .hg-header :is(a, button):focus-visible {
   outline-color: #8a4208;

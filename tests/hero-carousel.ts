@@ -135,6 +135,8 @@ export function registerHeroCarouselTests() {
       await page.getByRole("link", { name: "Explore inventory", exact: true }).click();
       await expect(page.locator(".hero-stage")).toHaveCount(0);
       await page.getByRole("link", { name: "VehicleSite home", exact: true }).first().click();
+      await expect(page.getByRole("heading", { level: 1 })).toContainText("CAR SALES.");
+      await page.getByRole("link", { name: "Showroom", exact: true }).click();
       await expectSingleCar(page, 0);
     });
   });
